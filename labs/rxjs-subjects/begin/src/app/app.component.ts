@@ -31,11 +31,19 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   subscribe2() {
-
+    this.subscripitons.add(
+      this.subjectsService.observable$.subscribe(
+        (data) => this.subscription2Data.push(data)
+      )
+    );
   }
 
   subscribe3() {
-
+    this.subscripitons.add(
+      this.subjectsService.observable$.subscribe(
+        (data) => this.subscription3Data.push(data)
+      )
+    );
   }
 
 
