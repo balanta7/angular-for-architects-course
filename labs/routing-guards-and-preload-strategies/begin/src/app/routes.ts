@@ -16,7 +16,7 @@ export const routes: Routes = [
       import('./villains/villains.module').then((m) => m.VillainsModule),
 
     data: { preload: true },
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    // canActivate: [AuthGuard],
+    // canLoad: [AuthGuard],
   },
 ];
