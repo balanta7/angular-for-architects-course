@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { CSRFInterceptor } from './csrf.interceptor';
 import { LogHeadersInterceptor } from './log-headers.interceptor';
+import { LogResponseTimeInterceptor } from './log-response.interceptor';
 
 export * from './auth.interceptor';
 export * from './csrf.interceptor';
@@ -18,5 +19,7 @@ export const httpInterceptorProviders = [
   { provide, useClass: CSRFInterceptor, multi },
 
   { provide, useClass: LogHeadersInterceptor, multi },
+
   // Response interceptor can go here
+  { provide, useClass: LogResponseTimeInterceptor , multi },
 ];

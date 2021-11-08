@@ -18,6 +18,28 @@ export class LogResponseTimeInterceptor implements HttpInterceptor {
     const started = Date.now();
     let ok: string;
 
-    return next.handle(req);
+    return next.handle(req).pipe(
+      tap(    
+        (event) => {
+          console.log('Setting the \'ok\' variable in case of HttpResponse event.');
+
+          return (ok = event instanceof HttpResponse ? 'succeeded' : '');
+        },
+        (error) => { 
+          console.error(error);
+          
+          return (ok = 'failed'); 
+        }
+      ),
+      finalize(() => {
+        const finished = Date.now();
+        const elapsedTime = finished - started;
+
+        console.log(req.method);
+        console.log(req.params);
+        console.log(elapsedTime + ' ms');
+        console.log('The request was executed with ' + ok);
+      })
+    );
   }
 }
